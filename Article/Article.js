@@ -85,11 +85,69 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Learning how to Play Hearthstone',
+    date: 'Aug 12th, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
+function article(title,date,para1,para2,para3) {
+  const div = document.createElement('div');
+  const h2 = div.appendChild(document.createElement('h2'));
+  const pDate = div.appendChild(document.createElement('p'));
+  const p1 = div.appendChild(document.createElement('p'));
+  const p2 = div.appendChild(document.createElement('p'));
+  const p3 = div.appendChild(document.createElement('p'));
+  const span = div.appendChild(document.createElement('span'));
+  span.addEventListener('click', e => {
+    if (div.classList.contains('article-open')){
+      div.classList.remove('article-open');
+      span.textContent = "Show Article";
+    }
+    else {
+      div.classList.add('article-open');
+      span.textContent = "Hide Article";
+    }
+  });
+
+  div.classList.add('article');
+  h2.textContent = title;
+  pDate.classList.add('date');
+  pDate.textContent = date;
+  p1.textContent = para1;
+  p2.textContent = para2;
+  p3.textContent = para3;
+  span.classList.add('expandButton');
+  span.textContent = "Show Article";
+
+  return div;
+}
+const articles = document.querySelector(".articles");
+
+let newArticles = data.map(ele => {
+  let artcl = article(ele.title, ele.date, ele.firstParagraph, ele.secondParagraph, ele.thirdParagraph);
+  return artcl;
+});
+
+newArticles.forEach( component => {
+  articles.appendChild(component);
+})
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -107,7 +165,7 @@ const data = [
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
