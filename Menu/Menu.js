@@ -8,6 +8,23 @@ let menuItems = [
   'Music',
   'Log Out'
 ];
+let header = document.querySelector('header');
+let div = document.createElement('div');
+let ul = div.appendChild(document.createElement('ul'));
+function comp(li) {
+  ul.appendChild(li);
+}
+let newList = menuItems.map( ele => {
+  let listItem = document.createElement('li');
+  listItem.textContent = ele;
+  return listItem;
+});
+
+newList.forEach(ele => {
+  comp(ele);
+})
+
+header.appendChild(div);
 
 /* 
 
