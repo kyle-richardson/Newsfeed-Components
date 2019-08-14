@@ -8,23 +8,32 @@ let menuItems = [
   'Music',
   'Log Out'
 ];
-let header = document.querySelector('header');
-let div = document.createElement('div');
-let ul = div.appendChild(document.createElement('ul'));
-function comp(li) {
-  ul.appendChild(li);
+
+let menuH1 = document.querySelector('.header h1');
+let header = document.querySelector('.header');
+
+function comp(arr) {
+  let menuButton = document.querySelector('.menu-button');
+  let menuDiv = document.createElement('div');
+  let ul = menuDiv.appendChild(document.createElement('ul'));
+  arr.forEach( ele => {
+    let temp = document.createElement('li');
+    temp.textContent = ele;
+    ul.appendChild(temp);
+  });
+  menuButton.addEventListener ('click', e => {
+    if (header.classList.contains('menu--open')) 
+      header.classList.remove('menu--open');
+    else 
+      header.classList.add('menu--open');
+  });
+  return menuDiv;
 }
-let newList = menuItems.map( ele => {
-  let listItem = document.createElement('li');
-  listItem.textContent = ele;
-  return listItem;
-});
 
-newList.forEach(ele => {
-  comp(ele);
-})
+header.insertBefore(comp(menuItems), menuH1); 
 
-header.appendChild(div);
+// header.appendChild(document.newElement('p'));
+
 
 /* 
 
