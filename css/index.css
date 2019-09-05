@@ -102,6 +102,13 @@
   padding: 30px 0;
   text-align: center;
 }
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+}
+.menu ul li a:hover {
+  color: lightgray;
+}
 .menu--open {
   display: block;
 }
