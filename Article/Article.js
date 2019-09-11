@@ -135,11 +135,12 @@ function article(obj) {
 
   //stretch goal - add remove button
   const close = div.appendChild(document.createElement('span'))
-  close.textContent="Close Article"
+  close.textContent="X"
+  close.classList.add('closeButton')
   close.addEventListener('click', e=> {
-    
+    div.classList.toggle('close-article')
   })
-  close.classList.toggle
+  
 
   return div;
 }
