@@ -104,7 +104,7 @@ const data = [
   }
 ];
 
-function article(title,date,para1,para2,para3) {
+function article(obj) {
   const div = document.createElement('div');
   const h2 = div.appendChild(document.createElement('h2'));
   const pDate = div.appendChild(document.createElement('p'));
@@ -124,27 +124,64 @@ function article(title,date,para1,para2,para3) {
   });
 
   div.classList.add('article');
-  h2.textContent = title;
+  h2.textContent = obj.title;
   pDate.classList.add('date');
-  pDate.textContent = date;
-  p1.textContent = para1;
-  p2.textContent = para2;
-  p3.textContent = para3;
+  pDate.textContent = obj.date;
+  p1.textContent = obj.firstParagraph;
+  p2.textContent = obj.secondParagraph;
+  p3.textContent = obj.thirdParagraph;
   span.classList.add('expandButton');
   span.textContent = "Show Article";
+
+  //stretch goal - add remove button
+  const close = div.appendChild(document.createElement('span'))
+  close.textContent="Close Article"
+  close.addEventListener('click', e=> {
+    
+  })
+  close.classList.toggle
 
   return div;
 }
 const articles = document.querySelector(".articles");
 
 let newArticles = data.map(ele => {
-  let artcl = article(ele.title, ele.date, ele.firstParagraph, ele.secondParagraph, ele.thirdParagraph);
+  let artcl = article(ele);
   return artcl;
 });
 
 newArticles.forEach( component => {
   articles.appendChild(component);
 })
+
+//stretch component cunstructor
+const body = document.querySelector("body")
+const newDiv = body.appendChild(document.createElement('div'))
+const newArticleButton = newDiv.appendChild(document.createElement('button'))
+newArticleButton.setAttribute('onclick', 'makeNewArticle()')
+newArticleButton.textContent='Write Your Own Article!'
+newDiv.style.textAlign='center'
+newArticleButton.classList.add('create-article-button')
+
+function makeNewArticle() {
+  let title = prompt("Title?")
+  let date =prompt("Date")
+  let first=prompt("First Paragraph")
+  let second=prompt("Second Paragraph")
+  let third=prompt("Third Paragraph")
+  const object = {
+    title: title,
+    date: date,
+    firstParagraph: first,
+    secondParagraph: second,
+    thirdParagraph: third
+  }
+  let insertPoint = document.querySelector('.articles')
+  let newArt = article(object)
+  insertPoint.appendChild(newArt)
+
+
+}
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
 
