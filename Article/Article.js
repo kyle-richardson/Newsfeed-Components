@@ -104,7 +104,7 @@ const data = [
   }
 ];
 
-function article(obj) {
+function createArticle(obj) {
   const div = document.createElement('div');
   const h2 = div.appendChild(document.createElement('h2'));
   const pDate = div.appendChild(document.createElement('p'));
@@ -135,27 +135,27 @@ function article(obj) {
 
   //stretch goal - add remove button
   const close = div.appendChild(document.createElement('span'))
-  close.textContent="X"
+  close.textContent='X'
   close.classList.add('closeButton')
   close.addEventListener('click', e=> {
     div.classList.toggle('close-article')
   })
   
-
   return div;
 }
-const articles = document.querySelector(".articles");
 
-let newArticles = data.map(ele => {
-  let artcl = article(ele);
+const articlesInsert = document.querySelector(".articles");
+
+let articleList = data.map(ele => {
+  let artcl = createArticle(ele);
   return artcl;
 });
 
-newArticles.forEach( component => {
-  articles.appendChild(component);
+articleList.forEach( component => {
+  articlesInsert.appendChild(component);
 })
 
-//stretch component cunstructor
+//stretch component constructor
 const body = document.querySelector("body")
 const newDiv = body.appendChild(document.createElement('div'))
 const newArticleButton = newDiv.appendChild(document.createElement('button'))
@@ -178,7 +178,7 @@ function makeNewArticle() {
     thirdParagraph: third
   }
   let insertPoint = document.querySelector('.articles')
-  let newArt = article(object)
+  let newArt = createArticle(object)
   insertPoint.appendChild(newArt)
 
 
