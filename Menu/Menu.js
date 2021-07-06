@@ -9,7 +9,51 @@ let menuItems = [
   'Log Out'
 ];
 
-/* 
+let menuH1 = document.querySelector('.header h1');
+let header = document.querySelector('.header');
+
+function comp(arr) {
+  let menuButton = document.querySelector('.menu-button');
+  let menuDiv = document.createElement('div');
+  let ul = menuDiv.appendChild(document.createElement('ul'));
+  arr.forEach( ele => {
+    let temp = document.createElement('li');
+    let tempLink = document.createElement('a');
+    tempLink.setAttribute('href', '#');
+    tempLink.textContent = ele;
+    temp.appendChild(tempLink);
+    ul.appendChild(temp);
+
+  });
+  menuDiv.classList.add("menu");
+
+  /* adding window listener to hide menu when clicking anywhere outside of menu.  
+  Not working as intended currently. */
+
+  // window.addEventListener ('click', e => {
+  //   e.stopPropagation();
+  //   if (!e.target.classList.contains('.menu-button')){
+  //     if (menuDiv.classList.contains('menu--open')) {
+  //       menuDiv.classList.remove('menu--open');
+  //     }
+  //   }
+  // }, false);
+
+  menuButton.addEventListener ('click', e => {
+    e.stopPropagation();
+    menuDiv.classList.toggle("menu--open");
+  }, false);
+  
+
+  return menuDiv;
+}
+
+header.insertBefore(comp(menuItems), menuH1); 
+
+
+
+
+/* Instructions for project below
 
   Step 1: Write a function that will create a menu component as seen below:
 
